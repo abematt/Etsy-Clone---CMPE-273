@@ -23,6 +23,7 @@ const Container = styled.div`
     flex:1;
     margin: 5px;
     min-width: 220px;
+    max-width: 220px;
     height: 220px;
     display: flex;
     align-items: center;

@@ -11,6 +11,13 @@ const Wrapper = styled.div`
     display: flex;
 `;
 
+const Top = styled.div`
+  display:flex;
+`;
+
+const Bottom = styled.div`
+`;
+
 const Title = styled.h1`
 `
 
@@ -20,6 +27,8 @@ const Cart = () => {
         <Navbar/>
         <Wrapper>
             <Title>Your Cart</Title>
+            <Top></Top>
+            <Bottom></Bottom>
         </Wrapper>
         <Footer/>
     </Container>
