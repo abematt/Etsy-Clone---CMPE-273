@@ -9,12 +9,13 @@ import {
         Routes,
         Route
 } from "react-router-dom";
+import ProfileUpdate from "./pages/ProfileUpdate";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/" element={<ProfileUpdate/>}/>
         <Route path = "/Profile" element={<Profile/>}/>
       </Routes>
     </Router>
