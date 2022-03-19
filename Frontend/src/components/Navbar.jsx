@@ -47,6 +47,11 @@ const Right = styled.div`
     justify-content: space-evenly;
     
 `
+
+const Icon = styled.span`
+    cursor: pointer;
+`
+
 const Navbar = () => {
   return (
     <Container> 
@@ -61,11 +66,17 @@ const Navbar = () => {
               </SearchContainer>
             </Center>
            <Right>
+                <Icon>
                 <FavoriteIcon/>
+                </Icon>
+                <Icon>
                 <PersonIcon/>
+                </Icon>
+                <Icon>
                 <Badge badgeContent={4} color="primary">
                     <ShoppingCartIcon/>
                 </Badge>
+                </Icon>
            </Right>
         </Wrapper>
     </Container>

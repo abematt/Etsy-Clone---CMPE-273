@@ -2,6 +2,7 @@ import styled from "styled-components"
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
 import CreateIcon from '@mui/icons-material/Create';
+import { useState } from 'react';
 
 const Container = styled.div`
 `;
@@ -42,6 +43,7 @@ const Button = styled.button`
     color: white;
     width: 40%;
     position: relative;
+    cursor: pointer;
 `;
 
 const Icon = styled.div`
@@ -80,7 +82,7 @@ const ShopHome = () => {
                     <ShopImage src="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png"></ShopImage>
                     <div>
                         <ShopName>Handmade Craftology</ShopName>
-                        <Button><Icon><CreateIcon/></Icon>Edit Shop</Button>
+                        <Button onClick=""><Icon><CreateIcon/></Icon>Edit Shop</Button>
                     </div>
                 </ShopInfoContainer>
                 <ShopOwnerContainer>
