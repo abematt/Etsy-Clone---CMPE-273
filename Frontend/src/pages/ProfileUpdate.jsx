@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 const Container = styled.div`
 `;
 const Wrapper = styled.div`
-    padding: 0 300px;
-    height: 100vh;
+    padding: 50px 300px;
+    min-height: 100vh;
     display:flex;
     flex-direction: column;
 `;
@@ -52,18 +52,36 @@ const Form = styled.div`
     margin: 50px 0px 0px 50px;
 `;
 const FormFieldName = styled.h3`
+    flex: 1;
 `;
 
-const HeadingColumn = styled.div`
+
+const FormInputField = styled.input`
+    flex: 3;
+`;
+
+const FormColumn = styled.div`
+    width: 50%;
 `;
 
 const FormCell = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 30px 0px;
 `;
 
-const FormInputField = styled.input`
+const ProfileColumn = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 30px 0px;
+`;
+
+
+const ProfilePicture = styled.img`
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
 `;
 
 const DateOfBirth = styled.div`
@@ -78,9 +96,16 @@ const Year = styled.select`
 const Day = styled.select`
 `;
 
-const Button = styled.div`
-    display: flex;
-    align-items: baseline;
+const Button = styled.button`
+    min-width: 15%;
+    margin: 10% 50%;
+
+`;
+
+const Username = styled.h3`
+`;
+
+const changeUsername = styled.a`
 `;
 
 const ProfileUpdate = () => {
@@ -99,7 +124,19 @@ const ProfileUpdate = () => {
             </Top>
             <Bottom>
                 <Form>
-                    <HeadingColumn>
+                    <FormColumn>
+                        <FormCell>
+                            <FormFieldName>Profile Picture: </FormFieldName>
+                            <FormInputField type ="file" placeholder="Enter File"></FormInputField>
+                        </FormCell>
+                        <ProfileColumn>
+                            <ProfilePicture src={"https://static.wikia.nocookie.net/community-sitcom/images/0/02/Troy_close_up_Season_Five.jpg"}/>
+                        </ProfileColumn>
+                        <FormCell>
+                            <FormFieldName>Username: </FormFieldName>
+                            <Username>troybarnes </Username>
+                            <changeUsername>Change Username</changeUsername>
+                        </FormCell>
                         <FormCell>
                             <FormFieldName>Name: </FormFieldName>
                             <FormInputField placeholder="Full Name"></FormInputField>
@@ -128,7 +165,9 @@ const ProfileUpdate = () => {
                                 <FormFieldName>Email: </FormFieldName>
                                 <FormInputField placeholder="Email"></FormInputField>
                         </FormCell>
-                    </HeadingColumn>
+                        <Button>Save Changes</Button>
+                    </FormColumn>
+                    
                 </Form>
             </Bottom>
         </Wrapper>
