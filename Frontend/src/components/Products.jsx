@@ -11,10 +11,12 @@ const Container = styled.div`
     min-height:100vh;
 `
 
-const Products = () => {
+const Products = (props) => {
   return (
     <Container>
-        {mainProducts.map(item => (
+        {console.log("these are props")}
+        {console.log(props.products)}
+        {props.products.map(item => (
             <Product item={item} key={item.id}/>
         ))}
     </Container>

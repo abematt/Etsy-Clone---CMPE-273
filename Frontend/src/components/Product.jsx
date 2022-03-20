@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import { useNavigate } from "react-router-dom";
+  
 const Icons = styled.div`
     position: absolute;
     opacity: 0;
@@ -63,9 +64,16 @@ const PriceTag = styled.div`
 
 
 const Product = ({item}) => {
+  let navigate = useNavigate();
+  const changeRoute = () => {
+    console.log("Hi")
+    let id = 123123
+    let path = `product/${id}`;
+    navigate(path);
+  }
   return (
-    <Container>
-        <Image src={item.img}/>
+    <Container onClick={changeRoute}>
+        <Image src={item.product_img}/>
         <PriceTag>${item.price}</PriceTag>
         <Icons>
           <FavoriteBorderIcon/>

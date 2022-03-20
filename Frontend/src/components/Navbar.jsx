@@ -6,9 +6,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge'; 
 import {currencyOptions} from '../data'
+import { Navigate } from 'react-router-dom';
 
 const Container = styled.div`
     height: 60px;
+`
+const Logo = styled.a`
+    cursor: pointer;
 `
 
 const Wrapper = styled.div`
@@ -48,7 +52,7 @@ const Right = styled.div`
     
 `
 
-const Icon = styled.span`
+const Icon = styled.a`
     cursor: pointer;
 `
 
@@ -57,7 +61,9 @@ const Navbar = () => {
     <Container> 
         <Wrapper>
            <Left>
+               <Logo href="/">
               <h1>ETSY</h1>
+              </Logo>
            </Left> 
            <Center>              
               <SearchContainer>
@@ -66,10 +72,10 @@ const Navbar = () => {
               </SearchContainer>
             </Center>
            <Right>
-                <Icon>
-                <FavoriteIcon/>
+                <Icon href="/profile">
+                <FavoriteIcon></FavoriteIcon>
                 </Icon>
-                <Icon>
+                <Icon href="/profile">
                 <PersonIcon/>
                 </Icon>
                 <Icon>

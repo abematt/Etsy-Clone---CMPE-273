@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import Navbar from '../components/Navbar'
 import Products from '../components/Products'
 import Footer from '../components/Footer'
+import axios from 'axios'
 
 const Home = () => {
+  const [products , setProducts] = useState([])
+
+  useEffect(()=> {
+    axios.get('http://localhost:3001/products').then(response => {
+      console.log(response.data)
+      setProducts(response.data)
+    }).catch(error => console.log(error))
+  }, [])
   return (
     <div>
       <Navbar/>
-      <Products/>
+      <Products products={products}/>
       <Footer/>
       </div>
   )
