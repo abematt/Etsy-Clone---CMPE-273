@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import React, { useState,useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
 `;
@@ -75,7 +77,13 @@ const AddToCart = styled.button`
 const Product = () => {
     const location = useLocation();
     const [product,setProduct] = useState({})
+    const [quantity, setQuantity] = useState(1)
+    const dispatch = useDispatch()
 
+const handleClick = () => {
+    dispatch(addProduct({product,quantity}));
+}
+    
 useEffect(()=> {
     const itemID = location.pathname.split("/")[2]
     const url = "http://localhost:3001/api/products/find/" + itemID
@@ -96,13 +104,13 @@ useEffect(()=> {
                 <Title>{product.title}</Title>
                 <Description>{product.description}</Description>
                 <Price>${product.price}</Price>
-                <Quantity>
+                <Quantity onChange={(e)=>setQuantity(e.target.value)}>
                     <QuantityOption disable selected hidden>Please Select A Value</QuantityOption>
-                    <QuantityOption>1</QuantityOption>
-                    <QuantityOption>2</QuantityOption>
-                    <QuantityOption>3</QuantityOption>
+                    {Array.from({length:product.quantity},(_,k)=>(
+                        <QuantityOption key={k+1} value={k+1}>{k+1}</QuantityOption>
+                    ))}
                 </Quantity>
-                <AddToCart>Add to Cart</AddToCart>
+                <AddToCart onClick={handleClick}>Add to Cart</AddToCart>
             </InfoContainer>
         </Wrapper>
         <Footer/>

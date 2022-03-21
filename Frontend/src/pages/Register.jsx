@@ -45,7 +45,14 @@ const Button = styled.button`
     background-color: orange;
 
 `;
-
+const Link = styled.a`
+    flex: 1;
+    min-width:50%;
+    margin: 10px 10px 0px 0px;
+    text-decoration: underline;
+    font-size: 15px;
+    cursor: pointer
+`;
 
 const Register = () => {
   return (
@@ -60,6 +67,7 @@ const Register = () => {
                     <Input placeholder="Password"/>
                     <Input placeholder="Confirm Password"/>
                     <Button>Create</Button>
+                    <Link href="/login">Sign in to your account</Link>
                 </Form>
         </Wrapper>
     </Container>

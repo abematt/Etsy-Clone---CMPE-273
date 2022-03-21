@@ -5,8 +5,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge'; 
-import {currencyOptions} from '../data'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
     height: 60px;
@@ -57,11 +57,14 @@ const Icon = styled.a`
 `
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  const quantity = useSelector(state=>state.cart.quantity)
+  
   return (
     <Container> 
         <Wrapper>
            <Left>
-               <Logo href="/">
+               <Logo onClick={()=>{navigate("/")}}>
               <h1>ETSY</h1>
               </Logo>
            </Left> 
@@ -79,7 +82,7 @@ const Navbar = () => {
                 <PersonIcon/>
                 </Icon>
                 <Icon>
-                <Badge badgeContent={4} color="primary">
+                <Badge badgeContent={quantity} color="primary">
                     <ShoppingCartIcon/>
                 </Badge>
                 </Icon>
