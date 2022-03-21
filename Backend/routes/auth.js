@@ -26,6 +26,7 @@ router.post("/register", async (req,res)=>{
 //LOGIN
 router.post("/login", async (req,res)=>{
     const user = await UserModel.findOne({ email: req.body.email });
+    const userJSON = user.toJSON()
     if (!user){
         res.send({success: false,code:401, message:'User Does not exist'});
     }
@@ -35,12 +36,21 @@ router.post("/login", async (req,res)=>{
         );
 
     const Originalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-        
+    
+    const accessToken = jwt.sign({
+        id: user.id,
+    },
+    process.env.JWT_SEC,
+    {expiresIn:"3d"}
+    );
+
+    const {password, ...others} = user.dataValues
+
     if (Originalpassword !== req.body.password){
-        res.send({  success:false, code:401, message: 'Invalid Credentials'});
+        res.send({ uccess:false, code:401, message: 'Invalid Credentials'});
     }
     else{
-        res.send({success:true, code:200,message: 'Successful Login'})
+        res.send({success:true, code:200,message: 'Successful Login', token:accessToken, userdetails: others})
     }
 })
 

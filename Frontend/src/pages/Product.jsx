@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import React, { useState,useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 const Container = styled.div`
 `;
@@ -70,20 +73,29 @@ const AddToCart = styled.button`
 `;
 
 const Product = () => {
+    const location = useLocation();
+    const [product,setProduct] = useState({})
+
+useEffect(()=> {
+    const itemID = location.pathname.split("/")[2]
+    const url = "http://localhost:3001/api/products/find/" + itemID
+    axios.get(url).then(response => {
+    console.log(response.data)
+    setProduct(response.data.product)
+    }).catch(error => console.log(error))
+  }, [])
   return (
     <Container>
         <Navbar/>
         <Wrapper>
             <ImageContainer>
-                <Image src="https://i.etsystatic.com/5522817/r/il/2b6c61/2429377088/il_570xN.2429377088_607d.jpg"/>
+                <Image src={product.product_img}/>
             </ImageContainer>
             <InfoContainer>
                 <ShopDetails></ShopDetails>
-                <Title>Handmade Craft Printables, Printable Instruction Cards, Washing Machine Instructions, Savlabol Care Details</Title>
-                <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Description>
-                <Price>$ 50</Price>
+                <Title>{product.title}</Title>
+                <Description>{product.description}</Description>
+                <Price>${product.price}</Price>
                 <Quantity>
                     <QuantityOption disable selected hidden>Please Select A Value</QuantityOption>
                     <QuantityOption>1</QuantityOption>

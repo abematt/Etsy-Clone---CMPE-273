@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Product  from './Product'
 import {mainProducts} from '../data'
+import { useLocation } from 'react-router-dom'
 
 const Container = styled.div`
     padding: 0px 300px;
@@ -12,10 +13,10 @@ const Container = styled.div`
 `
 
 const Products = (props) => {
+  const location = useLocation();
+  console.log(location);
   return (
     <Container>
-        {console.log("these are props")}
-        {console.log(props.products)}
         {props.products.map(item => (
             <Product item={item} key={item.id}/>
         ))}

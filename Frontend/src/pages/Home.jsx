@@ -8,7 +8,7 @@ const Home = () => {
   const [products , setProducts] = useState([])
 
   useEffect(()=> {
-    axios.get('http://localhost:3001/products').then(response => {
+    axios.get('http://localhost:3001/api/products').then(response => {
       console.log(response.data)
       setProducts(response.data)
     }).catch(error => console.log(error))

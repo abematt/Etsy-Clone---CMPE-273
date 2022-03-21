@@ -21,7 +21,8 @@ const UserModel = sequelize.define('User',{
         allowNull: false
     },
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 module.exports = UserModel
