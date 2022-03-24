@@ -8,6 +8,7 @@ const sequelize = require('./database');
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth")
 const productRoute = require("./routes/product")
+const shopRoute = require("./routes/shop")
 
 
 app.use(cors())
@@ -17,6 +18,8 @@ app.use(express.json());
 app.use("/api/user",userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
+app.use("/api/shops", shopRoute);
+
 // app.get("/api", async(req,res)=>{
 //     console.log("Inside Products")
 // //     const product_list = "SELECT * from Products";

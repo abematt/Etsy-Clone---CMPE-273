@@ -25,6 +25,8 @@ router.post("/register", async (req,res)=>{
 
 //LOGIN
 router.post("/login", async (req,res)=>{
+    console.log("I came here")
+    console.log(req.body)
     const user = await UserModel.findOne({ email: req.body.email });
     const userJSON = user.toJSON()
     if (!user){
@@ -47,7 +49,7 @@ router.post("/login", async (req,res)=>{
     const {password, ...others} = user.dataValues
 
     if (Originalpassword !== req.body.password){
-        res.send({ uccess:false, code:401, message: 'Invalid Credentials'});
+        res.send({ success:false, code:401, message: 'Invalid Credentials'});
     }
     else{
         res.send({success:true, code:200,message: 'Successful Login', token:accessToken, userdetails: others})

@@ -17,9 +17,10 @@ const Products = (props) => {
   console.log(location);
   return (
     <Container>
-        {props.products.map(item => (
+        {console.log("this is props",props.products.length)}
+        {props.products.length? props.products.map(item => (
             <Product item={item} key={item.id}/>
-        ))}
+        )): ""}
     </Container>
   )
 }

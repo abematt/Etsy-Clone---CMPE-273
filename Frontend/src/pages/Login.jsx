@@ -1,5 +1,8 @@
 import styled from "styled-components"
-
+import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from '../redux/apicalls'
+ 
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
@@ -45,7 +48,6 @@ const Button = styled.button`
     background-color: orange;
 
 `;
-
 const Link = styled.a`
     flex: 1;
     min-width:50%;
@@ -55,16 +57,40 @@ const Link = styled.a`
     cursor: pointer
 `;
 
+const Error = styled.p`
+    flex: 1;
+    min-width: 50%;
+    margin: 10px 10px 0px 0px;
+    font-size: 15px;
+    color: red;
+`
+
+
 const Login = () => {
+  const [email,setEmail] =useState("")
+  const [password,setPassword] = useState("")
+  const dispatch = useDispatch();
+  const {isFetching,error} = useSelector((state)=>state.user)
+  const handleClick = (e) =>{
+      e.preventDefault();
+      console.log({email,password})
+      login(dispatch,{email,password})
+  }
   return (
     <Container>
         <Wrapper>
             <Title>SIGN IN</Title>
                 <Form>
-                    <Input placeholder="Username"/>
-                    <Input placeholder="Password"/>
-                    <Button>Login</Button>
+                    <Input 
+                        placeholder="Email" 
+                        onChange={(e)=> setEmail(e.target.value)}/>
+                    <Input 
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e)=> setPassword(e.target.value)}/>
+                    <Button onClick={handleClick}>Login</Button>
                     <Link href="/register">Create a new account</Link>
+                    {error && <Error>Something went wrong</Error>}
                 </Form>
         </Wrapper>
     </Container>

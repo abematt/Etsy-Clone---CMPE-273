@@ -9,7 +9,6 @@ const Home = () => {
 
   useEffect(()=> {
     axios.get('http://localhost:3001/api/products').then(response => {
-      console.log(response.data)
       setProducts(response.data)
     }).catch(error => console.log(error))
   }, [])

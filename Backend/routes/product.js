@@ -41,4 +41,15 @@ router.get('/find/:id',async(req,res)=>{
     }
 })
 
+router.get('/shop/:id', async(req,res)=>{
+    const shopProducts = await productsModel.findAll({
+        where: {shop_id: req.params.id}
+    })
+    if (shopProducts) {
+        res.send({succes:true,shopProducts: shopProducts})
+    }
+    else {
+        res.send({success:false,shopProducts:{}})
+    }
+})
 module.exports = router;
