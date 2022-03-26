@@ -4,7 +4,12 @@ import Footer from '../components/Footer'
 import Favourites from "../components/Favourites";
 import CreateIcon from '@mui/icons-material/Create';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { useSelector } from "react-redux";
+import { useEffect,useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginDelete,loginFailure,loginSuccess } from "../redux/userRedux"
+import { Navigate, useNavigate } from 'react-router-dom';
 const Container = styled.div`
 
 `;
@@ -89,6 +94,37 @@ const Input = styled.input`
     
 `
 const Profile = () => {
+// const [favourites , setFavourites] = useState([])
+const products = useSelector((state)=>state.products)
+const user = useSelector((state)=>state.user)
+const allProductsArray = products.products
+const [filtered,setFiltered] = useState([])
+const dispatch = useDispatch();
+let navigate = useNavigate();
+const handleLogout = () => {
+    dispatch(loginSuccess(null))
+    navigate("/")
+}
+useEffect(()=>{
+    // console.log({"user_id":user.currentUser.userdetails.id})
+    axios.post("http://localhost:3001/api/fav/getFavs/",{"user_id":user.currentUser.userdetails.id})
+    .then(response=>{
+        const favourites = response.data.message
+        // console.log("Favourite items",response.data.message)
+        const filteredProducts =  allProductsArray.filter((el)=>{
+            return favourites.some((f)=>{
+                return f.product_id === el.id;
+            });
+        
+        })
+        setFiltered(filteredProducts)
+    })
+    .catch(error=>console.log(error))
+},[])
+
+
+    
+  
   return (
     <Container>
         <Navbar/>
@@ -96,8 +132,9 @@ const Profile = () => {
         <UserDetails>
             <ProfilePicture src={"https://static.wikia.nocookie.net/community-sitcom/images/0/02/Troy_close_up_Season_Five.jpg"}></ProfilePicture>
             <UsernameComponent>
-                <UserName>Troy</UserName>
+                <UserName>{user.currentUser.userdetails.name}</UserName>
                 <Icons><CreateIcon/></Icons>
+                <button onClick={handleLogout} >Logout</button>
             </UsernameComponent>
         </UserDetails>
         <SearchBar>
@@ -111,7 +148,7 @@ const Profile = () => {
                         <Title>Favourite Items </Title>
                         <Icons><CreateIcon/></Icons>
                     </FavouriteComp>
-                    <Favourites></Favourites>
+                    <Favourites favourites={filtered}></Favourites>
                 </FavoriteItems>
         </WrapperTwo>
         <Footer/>

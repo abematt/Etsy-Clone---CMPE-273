@@ -1,9 +1,13 @@
 import styled from "styled-components"
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
+import EditShop from "../components/EditShop"
+
 import CreateIcon from '@mui/icons-material/Create';
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css'
 
 import { useSelector } from "react-redux";
 
@@ -112,7 +116,12 @@ const ShopHome = () => {
                     <div>
                         <ShopName>{shopDetails.name}</ShopName>
                         <p>{shopDetails.description}</p>
-                        <Button><Icon><CreateIcon/></Icon>Edit Shop</Button>
+                        <Popup trigger={
+                            <Button><Icon><CreateIcon/></Icon>Edit Shop</Button>}
+                            modal
+                        >                       
+                        <EditShop shopDetails={shopDetails}/>
+                        </Popup>
                         <Button><Icon><CreateIcon/></Icon>Add Product</Button>
                         <Button onClick={displayProducts} disabled={productsLoaded}><Icon></Icon>Load Products</Button>
                     </div>

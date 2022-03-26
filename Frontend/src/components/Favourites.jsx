@@ -10,12 +10,14 @@ const Container = styled.div`
     min-height:100vh;
 `
 
-const Products = () => {
+const Products = (favourites) => {
+ 
   return (
     <Container>
-        {FavouriteProducts.map(item => (
+      {console.log("this is props",favourites)}
+        {favourites? favourites.favourites.map(item => (
             <Product item={item} key={item.id}/>
-        ))}
+        )): ""}
     </Container>
   )
 }

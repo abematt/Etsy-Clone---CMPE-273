@@ -17,7 +17,7 @@ const Products = (props) => {
   console.log(location);
   return (
     <Container>
-        {console.log("this is props",props.products.length)}
+        {console.log("this is props",props.products)}
         {props.products.length? props.products.map(item => (
             <Product item={item} key={item.id}/>
         )): ""}

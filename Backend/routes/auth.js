@@ -27,7 +27,9 @@ router.post("/register", async (req,res)=>{
 router.post("/login", async (req,res)=>{
     console.log("I came here")
     console.log(req.body)
-    const user = await UserModel.findOne({ email: req.body.email });
+    const user = await UserModel.findOne({ 
+        where: {email: req.body.email }
+     });
     const userJSON = user.toJSON()
     if (!user){
         res.send({success: false,code:401, message:'User Does not exist'});

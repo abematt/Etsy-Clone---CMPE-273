@@ -9,6 +9,7 @@ const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth")
 const productRoute = require("./routes/product")
 const shopRoute = require("./routes/shop")
+const favRoute = require("./routes/favourite")
 
 
 app.use(cors())
@@ -19,6 +20,7 @@ app.use("/api/user",userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/shops", shopRoute);
+app.use("/api/fav",  favRoute);
 
 // app.get("/api", async(req,res)=>{
 //     console.log("Inside Products")

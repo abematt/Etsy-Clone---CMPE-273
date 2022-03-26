@@ -69,6 +69,7 @@ const Error = styled.p`
 const Login = () => {
   const [email,setEmail] =useState("")
   const [password,setPassword] = useState("")
+
   const dispatch = useDispatch();
   const {isFetching,error} = useSelector((state)=>state.user)
   const handleClick = (e) =>{
@@ -90,7 +91,7 @@ const Login = () => {
                         onChange={(e)=> setPassword(e.target.value)}/>
                     <Button onClick={handleClick}>Login</Button>
                     <Link href="/register">Create a new account</Link>
-                    {error && <Error>Something went wrong</Error>}
+                    {/* {error && <Error>Something went wrong</Error>} */}
                 </Form>
         </Wrapper>
     </Container>

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from 'axios';
 
 const Icons = styled.div`
     position: absolute;
@@ -69,13 +71,22 @@ const Product = ({item}) => {
     let id = item.id
     let path = `product/${id}`;
     navigate(path);
-  }  
+  }
+  const user = useSelector((state)=>state.user)
+  const addFavourite = () => {
+    console.log("Product id: ",item.id)
+    console.log("User id: ",user.currentUser.userdetails.id)
+    let addFavourite = {"user_id":user.currentUser.userdetails.id,"product_id":item.id }
+    console.log(addFavourite)
+    axios.post('http://localhost:3001/api/fav/addFavs/',addFavourite)
+    .then(response=>{console.log(response.data)}).catch(error=>console.error(error))
+  }
   return (
     <Container>
         <Image onClick={changeRoute} src={item.product_img}/>
         <PriceTag>${item.price}</PriceTag>
         <Icons>
-          <FavoriteBorderIcon/>
+          <FavoriteBorderIcon onClick={addFavourite}/>
         </Icons>
     </Container>
   )

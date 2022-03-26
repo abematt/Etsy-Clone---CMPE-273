@@ -79,8 +79,8 @@ const Navbar = () => {
                 <Icon href="/profile">
                 <FavoriteIcon></FavoriteIcon>
                 </Icon>
-                <Icon href="/profile">
-                <PersonIcon/>
+                <Icon >
+                <PersonIcon onClick={()=>{navigate("/profile")}}/>
                 </Icon>
                 <Icon>
                     <AddBusinessIcon onClick={()=>{navigate("/create-shop")}}/>
